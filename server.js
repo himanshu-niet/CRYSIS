@@ -3,6 +3,7 @@ const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const { PORT } = require("./config/env");
+const { axios } = require("axios");
 
 connectDB();
 
@@ -13,6 +14,26 @@ app.use(express.json()); // to accept json data
 
 app.get("/",(req,res)=>{
     return res.json({message:"server running"})
+})
+
+// http://localhost:6000
+
+app.post("/ml",async(req,res)=>{
+  try {
+    const imageData = req.body.file; // Assuming the image data is sent as 'image' in the request body
+
+    // Make a POST request to your Flask application
+    const response = await axios.post('http://localhost:6000', { image: imageData });
+
+    // Handle the response from Flask here
+    console.log('Response from Flask:', response.data);
+
+    // Send a response back to the client
+   return res.json({ message: 'Image forwarded to Flask successfully', response: response.data });
+  } catch (error) {
+    console.error('Error forwarding image to Flask:', error);
+   return res.status(500).json({ message: 'Error forwarding image to Flask' });
+  }
 })
 
 
