@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json()); // to accept json data
 
 
-app.get("/msg",async(req,res)=>{
+app.post("/msg",async(req,res)=>{
   try{
     const { msg }=req.body;
 
