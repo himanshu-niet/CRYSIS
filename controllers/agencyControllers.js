@@ -8,8 +8,6 @@ const registerAgency = asyncHandler(async (req, res) => {
         agencyName,
         agencyType,
         email,
-        contactInformation,
-        headquartersLocation,
         address,
         agencyID,
         specialization,
@@ -23,15 +21,9 @@ const registerAgency = asyncHandler(async (req, res) => {
     if (!agencyName,
         !agencyType,
         !email,
-        !contactInformation,
-        !headquartersLocation,
+
         !address,
-        !agencyID,
-        !specialization,
-        !coverageArea,
-        !hoursOfOperation,
-        !emergencyResponseHistory,
-        !trainingAndCertifications,
+       
         !password) {
         res.status(400);
         throw new Error("Please Enter all the Feilds");
