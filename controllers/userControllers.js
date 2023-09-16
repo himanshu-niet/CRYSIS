@@ -24,7 +24,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
-    pic,
+
     phone,
     location: {
       type: 'Point',
