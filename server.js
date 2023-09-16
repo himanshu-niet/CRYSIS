@@ -3,13 +3,18 @@ const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const agencyRoutes = require("./routes/agencyRoutes");
 
+const cors = require('cors');
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const { PORT } = require("./config/env");
 
 
 connectDB();
 
+
+
 const app = express();
+
+app.use(cors());
 
 app.use(express.json()); // to accept json data
 
