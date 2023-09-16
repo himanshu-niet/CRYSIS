@@ -15,7 +15,7 @@ app.use(express.json()); // to accept json data
 
 
 app.get("/",(req,res)=>{
-    return res.json({message:"server running"})
+    return res.json({message:req})
 })
 
 // http://localhost:6000
