@@ -9,15 +9,13 @@ const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, phone, location,coordinates } = req.body;
 
   if (!name || !email || !password, !phone, !location,!coordinates) {
-    res.status(400);
-    throw new Error("Please Enter all the Feilds");
+    return res.status(400).json({msg:"Please Enter all the Feilds"})
   }
 
   const userExists = await User.findOne({ email });
 
   if (userExists) {
-    res.status(400);
-    throw new Error("User already exists");
+    return res.status(401).json({msg:"User Already Exists"})
   }
 
   const user = await User.create({
@@ -64,8 +62,7 @@ const registerUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(400);
-    throw new Error("Registration Failed.. Try Again");
+    return res.status(402).json({msg:"Registration Failed.. Try Again"})
   }
 });
 
@@ -75,6 +72,9 @@ const registerUser = asyncHandler(async (req, res) => {
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+  if ( !email || !password) {
+    return res.status(400).json({msg:"Please Enter all the Feilds"})
+  }
 
   const user = await User.findOne({ email });
 
@@ -96,8 +96,8 @@ const authUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(401);
-    throw new Error("Invalid Email or Password");
+    return res.status(401).json({msg:"Invalid Email or Password"})
+
   }
 });
 
