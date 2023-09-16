@@ -4,9 +4,11 @@ const generateToken = require("../config/generateToken");
 const HelpRequest = require("../models/requestModel");
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, pic, phone, location } = req.body;
 
-  if (!name || !email || !password, !phone, !location) {
+ 
+  const { name, email, password, phone, location,coordinates } = req.body;
+
+  if (!name || !email || !password, !phone, !location,!coordinates) {
     res.status(400);
     throw new Error("Please Enter all the Feilds");
   }
@@ -26,8 +28,31 @@ const registerUser = asyncHandler(async (req, res) => {
     phone,
     location: {
       type: 'Point',
-      area:location.area,
-      coordinates: [location.longitude, location.latitude],
+      area:{ 
+        name,
+        street,
+        isoCountryCode,
+        country,
+        postalCode,
+        administrativeArea,
+        subAdministrativeArea,
+        locality,
+        subLocality,
+        thoroughfare,
+        subThoroughfare
+        // name:location.name,
+        // street:location.street,
+        // isoCountryCode:location.isoCountryCode,
+        // country:location.country,
+        // postalCode:location.postalCode,
+        // administrativeArea:location.administrativeArea,
+        // subAdministrativeArea:location.subAdministrativeArea,
+        // locality:location.locality,
+        // subLocality:location.subLocality,
+        // thoroughfare:location.thoroughfare,
+        // subThoroughfare:location.subThoroughfare
+       },
+      coordinates: [coordinates.longitude, coordinates.latitude],
     },
   });
 

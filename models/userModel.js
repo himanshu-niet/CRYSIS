@@ -19,7 +19,19 @@ const userSchema = mongoose.Schema(
         enum: ['Point'], // Only 'Point' type for location
         required: true,
       },
-      area:{ type: "String", required: true },
+      area:{ 
+        name:String,
+        street:String,
+        isoCountryCode:String,
+        country:String,
+        postalCode:String,
+        administrativeArea:String,
+        subAdministrativeArea:String,
+        locality:String,
+        subLocality:String,
+        thoroughfare:String,
+        subThoroughfare:String
+       },
       coordinates: {
         type: [Number], // [longitude, latitude] coordinates
         required: true,
