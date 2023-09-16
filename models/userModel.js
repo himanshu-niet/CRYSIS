@@ -24,7 +24,7 @@ const userSchema = mongoose.Schema(
         street:String,
         isoCountryCode:String,
         country:String,
-        postalCode:String,
+        postalCode:Number,
         administrativeArea:String,
         subAdministrativeArea:String,
         locality:String,
