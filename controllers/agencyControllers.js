@@ -9,12 +9,7 @@ const registerAgency = asyncHandler(async (req, res) => {
         agencyType,
         email,
         address,
-        agencyID,
-        specialization,
-        coverageArea,
-        hoursOfOperation,
-        emergencyResponseHistory,
-        trainingAndCertifications,
+        phone,
         password,
     } = req.body;
 
@@ -41,15 +36,10 @@ const registerAgency = asyncHandler(async (req, res) => {
         agencyName,
         agencyType,
         email,
-        contactInformation,
-        headquartersLocation,
+        
+        
         address,
-        agencyID,
-        specialization,
-        coverageArea,
-        hoursOfOperation,
-        emergencyResponseHistory,
-        trainingAndCertifications,
+        
         password
     });
 
