@@ -14,7 +14,7 @@ const { protect } = require("../middleware/userAuthMiddleware");
 const router = express.Router();
 
 router.route("/get").get(protect,getUser);
-router.route("/msg").get(msg);
+router.route("/msg").post(msg);
 
 router.route("/history").get(protect, getHistoryRequestUser);
 router.route("/active").get(protect, getActiveRequestUser);

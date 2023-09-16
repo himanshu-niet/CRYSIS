@@ -7,7 +7,7 @@ const HelpRequest = require("../models/requestModel");
 
 const msg = asyncHandler(async (req, res) => {
 
-  res.status(208).json({req});
+  res.json({req});
 }
 );
 
