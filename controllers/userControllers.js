@@ -3,6 +3,14 @@ const User = require("../models/userModel");
 const generateToken = require("../config/generateToken");
 const HelpRequest = require("../models/requestModel");
 
+
+
+const msg = asyncHandler(async (req, res) => {
+
+  res.status(208).json({req});
+}
+);
+
 const registerUser = asyncHandler(async (req, res) => {
 
  
@@ -208,4 +216,4 @@ const getHistoryRequestUser = asyncHandler(async (req, res) => {
 
 });
 
-module.exports = { registerUser, authUser,requestUser,getActiveRequestUser,getHistoryRequestUser ,getUser};
+module.exports = { registerUser, authUser,requestUser,getActiveRequestUser,getHistoryRequestUser ,getUser,msg};
