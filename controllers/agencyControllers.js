@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 
 const generateToken = require("../config/generateToken");
 const Agency = require("../models/agencyModel");
+const HelpRequest = require("../models/requestModel");
 
 const registerAgency = asyncHandler(async (req, res) => {
     const {
@@ -21,7 +22,7 @@ const registerAgency = asyncHandler(async (req, res) => {
        
         !password) {
         res.status(400);
-        res.json(req)
+        res.json({req})
         throw new Error("Please Enter all the Feilds");
     }
 
@@ -82,10 +83,22 @@ const authAgency = asyncHandler(async (req, res) => {
 
 
 
+const getPending = asyncHandler(async (req, res) => {
+    
+
+
+    const request = await HelpRequest.find({isActive:true,agencyId:''})
+    
+    res.status(200).json({request
+    });
+});
 
 
 
 
 
 
-module.exports = { registerAgency, authAgency };
+
+
+
+module.exports = { registerAgency, authAgency,getPending };
