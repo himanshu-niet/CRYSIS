@@ -23,7 +23,7 @@ app.post("/msg",async(req,res)=>{
   try{
     const { msg }=req.body;
 
-  const user = await User.create({});
+  // const user = await User.create({});
 
 
     return res.json({message:req})
