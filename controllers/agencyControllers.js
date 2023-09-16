@@ -21,6 +21,7 @@ const registerAgency = asyncHandler(async (req, res) => {
        
         !password) {
         res.status(400);
+        res.json(req)
         throw new Error("Please Enter all the Feilds");
     }
 
