@@ -22,7 +22,7 @@ const agencySchema = new mongoose.Schema(
            
             phoneNumber: {
                 type: String,
-                required: true,
+            
                 // unique: true, // Ensure phone number is unique
             },
             emergencyContact: String,
