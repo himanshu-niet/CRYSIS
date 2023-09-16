@@ -107,7 +107,17 @@ const getUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ _id:userId });
 
   if (user) {
-    res.status(200).json({user})
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      pic: user.pic,
+      phone: user.phone,
+      location: user.location.area,
+      coordinates:user.location.coordinates
+      ,
+     
+    })
   } else {
     res.status(400);
     throw new Error(" not found");
