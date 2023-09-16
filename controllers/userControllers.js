@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const generateToken = require("../config/generateToken");
+const HelpRequest = require("../models/requestModel");
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, pic, phone, location } = req.body;
@@ -85,4 +86,87 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerUser, authUser };
+
+const requestUser = asyncHandler(async (req, res) => {
+  const { 
+    emergencyType,
+    location,
+    currentLocation,
+    urgencyLevel,
+    description, } = req.body;
+
+    console.log(req.user)
+    const userId=req.user._id;
+
+    const request = await HelpRequest.create({
+      userId,
+    emergencyType,
+    location,
+    currentLocation,
+    urgencyLevel,
+    description,
+    });
+
+    // const nearestAgency = await Agency.findOne({
+    //   agencyType: emergencyType,
+    //   location: {
+    //     $near: {
+    //       $geometry: {
+    //         type: 'Point',
+    //         coordinates: [currentLocation.longitude, currentLocation.latitude],
+    //       },
+    //       $maxDistance: 20000, // 10 kilometers in meters
+    //     },
+    //   },
+    // });
+  
+    if (request) {
+      res.status(201).json({
+        _id: request._id,
+        request
+        // nearestAgency
+      });
+    } else {
+      res.status(400);
+      throw new Error(" not found");
+    }
+
+});
+
+
+const getActiveRequestUser = asyncHandler(async (req, res) => {
+  
+    const userId=req.user._id;
+
+    const activeRequests = await HelpRequest.find({ isActive: true,userId:userId });
+  
+    if (activeRequests) {
+      res.status(200).json({
+        activeRequests
+      });
+    } else {
+      res.status(400);
+      throw new Error(" not found");
+    }
+
+});
+
+
+const getHistoryRequestUser = asyncHandler(async (req, res) => {
+  
+  const userId=req.user._id;
+
+  const hisRequests = await HelpRequest.find({ isActive: false,userId:userId });
+
+  if (hisRequests) {
+    res.status(200).json({
+      hisRequests
+    });
+  } else {
+    res.status(400);
+    throw new Error(" not found");
+  }
+
+});
+
+module.exports = { registerUser, authUser,requestUser,getActiveRequestUser,getHistoryRequestUser };
